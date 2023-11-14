@@ -16,6 +16,7 @@ grade: stable
 confinement: strict
 license: GPL-3.0
 issues: https://github.com/alexmurray/no-more-secrets-snap/issues
+website: https://github.com/bartobri/no-more-secrets
 
 apps:
   nms:
