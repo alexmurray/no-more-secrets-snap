@@ -13,6 +13,7 @@ description: |
 
 grade: stable
 confinement: strict
+license: GPL-3.0
 
 apps:
   nms:
