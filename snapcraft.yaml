@@ -1,0 +1,35 @@
+name: no-more-secrets
+base: core22
+version: '1.0.1'
+summary: CLI tool that recreates the decryption effect from the movie Sneakers.
+description: |
+  This project provides a command line tool called nms that recreates the famous
+  data decryption effect seen on screen in the 1992 hacker movie Sneakers. For
+  reference, you can see this effect at 0:35 in this movie clip.
+
+  This command works on piped data. Pipe any ASCII or UTF-8 text to nms, and it
+  will apply the Hollywood effect, initially showing encrypted data, then starting
+  a decryption sequence to reveal the original plain-text characters.
+
+grade: stable
+confinement: strict
+
+apps:
+  nms:
+    command: usr/local/bin/nms
+  sneakers:
+    command: usr/local/bin/sneakers
+
+parts:
+  no-more-secrets:
+    # See 'snapcraft plugins'
+    plugin: make
+    source: https://github.com/bartobri/no-more-secrets.git
+    source-tag: v$SNAPCRAFT_PROJECT_VERSION
+    make-parameters:
+      - all
+    override-build: |
+      craftctl default
+      # upstream install doesn't dtrt and so we end up with zero-sized binaries
+      # - so manually copy these instead
+      cp bin/* $SNAPCRAFT_PART_INSTALL/usr/local/bin
